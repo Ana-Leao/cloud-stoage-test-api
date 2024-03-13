@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CloudStorageTest.Application.UseCases.Users.UploadProfilePhoto;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CloudStorageTest.API.Controllers;
 
@@ -6,9 +7,13 @@ namespace CloudStorageTest.API.Controllers;
 [ApiController]
 public class StorageController : ControllerBase
 {
-    [HttpPost]
+    [HttpPost()]
     public IActionResult UploadImage(IFormFile file)
     {
+        var useCase = new UploadProfilePhotoUseCase();
+
+        useCase.Execute(file);
+
         return Created();
     }
 }
